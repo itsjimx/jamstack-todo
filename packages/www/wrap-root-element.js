@@ -3,8 +3,8 @@ const React = require('react');
 const { ThemeProvider } = require('theme-ui');
 const { deep } = require("@theme-ui/presets");
 
-const tokens = {
-    ...deep, // TODO what does this do
+const tokens = { // basically adds size param to tokens
+    ...deep, // JS spread passes all elements of deep into tokens
     sizes: { container: 1024 }
 };
 

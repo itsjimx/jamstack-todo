@@ -10202,24 +10202,33 @@ exports.wrapRootElement = wrapRootElement;
 /*!******************************!*\
   !*** ./wrap-root-element.js ***!
   \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var theme_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! theme-ui */ "../../node_modules/theme-ui/dist/index.esm.js");
-/* harmony import */ var _theme_ui_presets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @theme-ui/presets */ "../../node_modules/@theme-ui/presets/dist/index.esm.js");
 // basic usage
+const React = __webpack_require__(/*! react */ "react");
 
+const {
+  ThemeProvider
+} = __webpack_require__(/*! theme-ui */ "../../node_modules/theme-ui/dist/index.esm.js");
 
+const {
+  deep
+} = __webpack_require__(/*! @theme-ui/presets */ "../../node_modules/@theme-ui/presets/dist/index.esm.js");
 
-/* harmony default export */ __webpack_exports__["default"] = (({
+const tokens = { // basically adds size param to tokens
+  ...deep,
+  // JS spread passes all elements of deep into tokens
+  sizes: {
+    container: 1024
+  }
+};
+
+module.exports = ({
   element
-}) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(theme_ui__WEBPACK_IMPORTED_MODULE_1__["ThemeProvider"], {
-  theme: _theme_ui_presets__WEBPACK_IMPORTED_MODULE_2__["deep"]
-}, element));
+}) => /*#__PURE__*/React.createElement(ThemeProvider, {
+  theme: tokens
+}, element);
 
 /***/ }),
 
