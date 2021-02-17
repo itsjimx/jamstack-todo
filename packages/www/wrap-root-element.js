@@ -2,6 +2,7 @@
 const React = require('react');
 const { ThemeProvider } = require('theme-ui');
 const { deep } = require("@theme-ui/presets");
+const { Provider } = require("./identity-context")
 
 const tokens = { // basically adds size param to tokens
     ...deep, // JS spread passes all elements of deep into tokens
@@ -9,5 +10,7 @@ const tokens = { // basically adds size param to tokens
 };
 
 module.exports = ({ element }) => (
-  <ThemeProvider theme={tokens}>{element}</ThemeProvider>
+  <Provider>
+    <ThemeProvider theme={tokens}>{element}</ThemeProvider>
+  </Provider>
 );
