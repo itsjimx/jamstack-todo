@@ -17,7 +17,7 @@ const typeDefs = gql`
 `;
 
 const todos = {}
-// resolver
+// Provide resolver functions for your schema fields
 const resolvers = {
     Query: {
         todos: () => {
@@ -37,13 +37,6 @@ const resolvers = {
         }
     }
 }
-
-// Provide resolver functions for your schema fields
-const resolvers = {
-    Query: {
-        hello: () => 'Hello world!',
-    },
-};
 
 const server = new ApolloServer({
     typeDefs,
