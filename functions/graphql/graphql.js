@@ -1,4 +1,4 @@
-const { ApolloServer, gql } = require('apollo-server-lambda');
+const { ApolloServer, gql } = require("apollo-server-lambda");
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
@@ -16,7 +16,7 @@ const typeDefs = gql`
   }
 `;
 
-const todos = {}
+const todos = {};
 let todoIndex = 0;
 // Provide resolver functions for your schema fields
 const resolvers = {
@@ -37,7 +37,7 @@ const resolvers = {
       return todos[id];
     }
   }
-}
+};
 
 const server = new ApolloServer({
   typeDefs,
@@ -49,12 +49,12 @@ const server = new ApolloServer({
   // If you'd like to have GraphQL Playground and introspection enabled in production,
   // the `playground` and `introspection` options must be set explicitly to `true`.
   playground: true,
-  introspection: true,
+  introspection: true
 });
 
 exports.handler = server.createHandler({
   cors: {
-    origin: '*',
+    origin: "*",
     credentials: true
   }
 });
