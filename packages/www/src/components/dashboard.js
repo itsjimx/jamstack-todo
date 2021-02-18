@@ -14,9 +14,9 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { IdentityContext } from "../../identity-context";
 
 const ADD_TODO = gql`
-  mutation AddTodo($type: String!) {
-    addTodo(type: $type) {
-        id
+  mutation AddTodo($text: String!) {
+    addTodo(text: $text) {
+      id
     }
   }
 `;
@@ -60,7 +60,7 @@ export default () => {
     const inputRef = useRef();
     const [addTodo] = useMutation(ADD_TODO);
     const [updateTodoDone] = useMutation(UPDATE_TODO_DONE);
-    const { loading, error, data } = useQuery(GET_TODOS);
+    const { loading, error, data, refetch } = useQuery(GET_TODOS);
     return (
         <Container>
             <Flex as="nav">
@@ -102,15 +102,19 @@ export default () => {
                 {error ? <div>{error.message}</div> : null}
                 {!loading && !error && (
                     <ul sx={{ listStyleType: "none" }}>
-                        {todos.map((todo, i) => (
+                        {data.todos.map(todo => (
                             <Flex
+                                key={todo.id}
                                 as="li"
-                                onClick={() => {
-                                    updateTodoDone({ variables: { id: todo.id } });
+                                onClick={async () => {
+                                    console.log("updateTodoDone");
+                                    await updateTodoDone({ variables: { id: todo.id } });
+                                    console.log("refetching");
+                                    await refetch();
                                 }}
                             >
-                                <Checkbox checked={todo.done} />
-                                <span>{todo.value}</span>
+                                <Checkbox checked={todo.done} readOnly />
+                                <span>{todo.text}</span>
                             </Flex>
                         ))}
                     </ul>
