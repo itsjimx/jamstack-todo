@@ -21,19 +21,19 @@ const ADD_TODO = gql`
   }
 `;
 
-const GET_TODOS = gql`
-  query GetTodos {
-    todos {
-      id
+const UPDATE_TODO_DONE = gql`
+  mutation UpdateTodoDone($id: ID!) {
+    updateTodoDone(id: $id) {
       text
       done
     }
   }
 `;
 
-const UPDATE_TODO_DONE = gql`
-  mutation UpdateTodoDone($id: ID!) {
-    updateTodoDone(id: $id) {
+const GET_TODOS = gql`
+  query GetTodos {
+    todos {
+      id
       text
       done
     }
@@ -84,10 +84,11 @@ export default () => {
             </Flex>
             <Flex
                 as="form"
-                onSubmit={e => {
+                onSubmit={async e => {
                     e.preventDefault();
-                    addTodo({ variables: { text: inputRef.current.value } });
+                    await addTodo({ variables: { text: inputRef.current.value } });
                     inputRef.current.value = "";
+                    await refetch();
                 }}
             >
                 <Label sx={{ display: "flex" }}>
