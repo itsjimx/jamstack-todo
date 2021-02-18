@@ -21,7 +21,7 @@ let todoIndex = 0;
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
-    todos: () => {
+    todos: (parent, args, { user }) => {
       if (!user) {
         return [];
       } else {
